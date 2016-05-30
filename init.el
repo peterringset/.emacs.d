@@ -41,6 +41,7 @@
 (load-config "css")
 (load-config "tern")
 (load-config "magit")
+(load-config "neotree")
 
 ;; --------------------------------------
 
