@@ -40,6 +40,7 @@
 (load-config "webmode")
 (load-config "css")
 (load-config "tern")
+(load-config "magit")
 
 ;; --------------------------------------
 
