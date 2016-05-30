@@ -9,7 +9,9 @@
 		  js3-enter-indents-newline t
 		  js3-expr-indent-offset 2
 		  js3-lazy-commas t
-		  js3-lazy-dots t
+		  ; js3-lazy-dots t
 		  js3-lazy-operators t
 		  js3-paren-indent-offset 2
 		  js3-square-indent-offset 4)))
+
+
