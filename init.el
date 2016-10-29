@@ -16,10 +16,8 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setenv "NODE_PATH" "/usr/local/lib/node_modules")
 
-
 (defun load-config (f)
   (load-file (concat +emacs-conf-dir+ "/" f ".el")))
-
 
 (load-theme 'spacegray t)
 
@@ -36,21 +34,19 @@
 (setq-default indent-tabs-mode nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-
 ;; --------------------------------------
 
-; (load-config "js")
-(load-config "webmode")
 (load-config "css")
-(load-config "tern")
+(load-config "elm")
 (load-config "magit")
+(load-config "markdown")
 (load-config "neotree")
+(load-config "tern")
+(load-config "webmode")
 
 ;; --------------------------------------
-
 
 (require 'nodejs-repl)
-
 
 (setq mac-option-modifier nil
       mac-command-modifier 'meta
