@@ -33,6 +33,9 @@
          (linum-format (concat " %" (number-to-string w) "d ")))
     ad-do-it))
 
+(setq-default indent-tabs-mode nil)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 ;; --------------------------------------
 
