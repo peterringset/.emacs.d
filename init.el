@@ -19,7 +19,7 @@
 (defun load-config (f)
   (load-file (concat +emacs-conf-dir+ "/" f ".el")))
 
-(load-theme 'spacegray t)
+(load-theme 'spacemacs-dark t)
 
 (global-hl-line-mode 1)
 (global-linum-mode 1)
@@ -35,6 +35,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; --------------------------------------
+(load-config "helm")
 
 (load-config "css")
 (load-config "elm")
@@ -59,9 +60,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(magit-commit-arguments (quote ("--gpg-sign=999ABCF36AE3B637")))
  '(package-selected-packages
    (quote
-    (web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
+    (helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
