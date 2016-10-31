@@ -2,9 +2,14 @@
 
 ## Requirements
 
-* tern
+* elm
+* helm
 * magit
 * neotree
+* tern
+* webmode
+* yasnippets
+
 
 ### Other
 
