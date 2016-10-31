@@ -23,6 +23,7 @@
 
 (global-hl-line-mode 1)
 (global-linum-mode 1)
+(setq shell-file-name "bash")
 (setq-default line-spacing 5)
 
 (defadvice linum-update-window (around linum-dynamic activate)
