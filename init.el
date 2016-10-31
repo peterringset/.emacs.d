@@ -41,7 +41,6 @@
 (load-config "css")
 (load-config "elm")
 (load-config "magit")
-(load-config "markdown")
 (load-config "neotree")
 (load-config "tern")
 (load-config "webmode")
