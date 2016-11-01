@@ -1,17 +1,15 @@
-# my .emacs.d
+# .emacs.d
 
-## Requirements
+**My .emacs.d - use it, break it, fix it, trash it**
 
-* elm
-* helm
-* magit
-* neotree
-* tern
-* webmode
-* yasnippets
+This emacs configuration is tested in emacs 25.1 on macOS. Some of the configurations aren't compatible with Windows or Linux, yet.
 
+## Usage
 
-### Other
+Clone this into your home folder as `.emacs.d`. Rember to backup your old `.emacs.d` if you already have one:
 
-* spacegray-theme
-* nodejs-repl
+```
+git clone https://github.com/tmn/.emacs.d.git ~/.emacs.d
+```
+
+Cheers!
