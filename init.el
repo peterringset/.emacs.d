@@ -76,20 +76,45 @@
   (yas-global-mode 1))
 
 (use-package elm-mode
-  :init
-  (add-to-list 'auto-mode-alist '("\\.elm$" . elm-mode)))
+  :mode "\\.elm$")
 
 (use-package neotree
   :bind (("C-x p" . neotree-toggle)))
 
-(use-package web-mode
-  :mode ("\\.html?\\'"
-         "\\.css?\\'"
-         "\\.less?\\'"
-         "\\.scss?\\'"
-         "\\.js?\\'"
-         "\\.jsx?\\'")
+(use-package erlang
+  :mode "\\.erl$")
 
+(use-package elixir-mode
+  :mode "\\.\\(ex[s]\\|elixir\\)$")
+
+(use-package ruby-end
+  :diminish ruby-end-mode
+  :init
+  (defun ruby-end ()
+    (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
+         "\\(?:^\\|\\s-+\\)\\(?:do\\)")
+    (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
+    (ruby-end-mode +1))
+
+  (add-hook 'elixir-mode-hook 'ruby-end)
+
+  (remove-hook 'ruby-mode-hook 'ruby-end-mode)
+  (remove-hook 'enh-ruby-mode-hook 'ruby-end-mode)
+
+  :config
+  (remove-hook 'ruby-mode-hook 'ruby-end-mode)
+  (remove-hook 'enh-ruby-mode-hook 'ruby-end-mode)
+)
+
+
+
+(use-package alchemist
+  :diminish alchemist-mode
+  :init
+  (add-to-list 'elixir-mode-hook (alchemist-mode)))
+
+(use-package web-mode
+  :mode "\\.\\(html\\|css\\|less\\|scss\\|js[x]\\)$"
   :init
   (setq web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
@@ -104,14 +129,22 @@
 ;; --------------------------------------
 
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(magit-commit-arguments (quote ("--gpg-sign=999ABCF36AE3B637")))
  '(package-selected-packages
    (quote
-    (org yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional)))
+    (ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
 
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:height 120 :family "Menlo")))))
