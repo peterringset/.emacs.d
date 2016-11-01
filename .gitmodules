@@ -1,3 +1,0 @@
-[submodule "libs/tern"]
-	path = libs/tern
-	url = https://github.com/ternjs/tern.git
