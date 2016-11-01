@@ -50,6 +50,9 @@
 (use-package magit
   :bind (("C-x g" . magit-status)))
 
+(use-package org
+  :defer t)
+
 (use-package helm
   :bind (("C-x C-f" . helm-find-files)
          ("C-x C-b" . helm-buffers-list)
@@ -109,7 +112,7 @@
  '(magit-commit-arguments (quote ("--gpg-sign=999ABCF36AE3B637")))
  '(package-selected-packages
    (quote
-    (tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
+    (org yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional)))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
