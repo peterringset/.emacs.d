@@ -16,29 +16,28 @@
 (defconst +emacs-conf-dir+ (concat +emacs-dir+ "/configs"))
 (defconst +emacs-snippets-dir+ (concat +emacs-dir+ "/snippets"))
 
-(add-to-list 'load-path (concat +emacs-dir+ "/includes"))
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(global-hl-line-mode 1)
-(global-linum-mode 1)
-
 (defun load-config (f)
   (load-file (concat +emacs-conf-dir+ "/" f ".el")))
 
-(setq mac-option-modifier nil
-      mac-command-modifier 'meta
-      shell-file-name "bash"
-      use-package-always-ensure t
-      x-select-enable-clipboard t)
-
 (setq-default indent-tabs-mode nil)
 (setq-default line-spacing 5)
+
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier nil)
+(setq shell-file-name "bash")
+(setq use-package-always-ensure t)
+(setq x-select-enable-clipboard t)
 
 (defadvice linum-update-window (around linum-dynamic activate)
   (let* ((w (length (number-to-string
                      (count-lines (point-min) (point-max)))))
          (linum-format (concat " %" (number-to-string w) "d ")))
     ad-do-it))
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(global-hl-line-mode 1)
+(global-linum-mode 1)
 
 ;; --------------------------------------
 
@@ -104,10 +103,6 @@
 ;; --------------------------------------
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(magit-commit-arguments (quote ("--gpg-sign=999ABCF36AE3B637")))
  '(package-selected-packages
@@ -118,8 +113,4 @@
  '(tool-bar-mode nil))
 
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(default ((t (:height 120 :family "Menlo")))))
