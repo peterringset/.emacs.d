@@ -131,6 +131,10 @@
 (use-package web-mode
   :mode "\\.\\(html\\|css\\|less\\|scss\\|js[x]\\)$"
   :init
+  (setq web-mode-content-types-alist
+        '(("jsx" . "\\.js[x]?\\'")))
+  (setq web-mode-content-types-alist
+        '(("css" . "\\.\\(less\\|scss\\)$")))
   (setq web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2))
