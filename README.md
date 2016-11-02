@@ -19,13 +19,13 @@ Install system dependencies for some of the emacs packages.
 ### macOS
 
 ```bash
-brew install the_silver_searcher
+brew install the_silver_searcher tern
 ```
 
 ### Linux (apt)
 
 ```bash
-apt-get install silversearcher-ag
+apt-get install silversearcher-ag tern
 ```
 
 Cheers!
