@@ -140,6 +140,7 @@
         web-mode-code-indent-offset 2))
 
 (use-package auto-complete
+  :diminish auto-complete-mode
   :init
   (add-hook 'web-mode-hook 'auto-complete-mode))
 
