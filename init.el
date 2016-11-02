@@ -151,7 +151,7 @@
   (add-hook 'js2-mode-hook 'tern-mode))
 
 (use-package web-mode
-  :mode "\\.\\(html\\|css\\|less\\|scss\\|js[x]?\\)$"
+  :mode "\\.\\(html\\|css\\|less\\|scss\\|jsx\\)$"
   :init
   (setq web-mode-content-types-alist
         '(("jsx" . "\\.js[x]?\\'")
