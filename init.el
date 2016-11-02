@@ -23,6 +23,7 @@
 (setq-default indent-tabs-mode nil)
 (setq-default line-spacing 5)
 
+(setq inhibit-startup-screen t)
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier nil)
 (setq shell-file-name "bash")
