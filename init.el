@@ -72,9 +72,17 @@
 
   :config
   (helm-mode 1)
+  (custom-set-variables
+   '(helm-follow-mode-persistent t))
 
   (use-package helm-ls-git
-    :bind (("C-x C-d" . helm-browse-project))))
+    :bind (("C-x C-d" . helm-browse-project)))
+
+  (use-package helm-ag
+    :defer t)
+
+  (use-package helm-projectile
+    :defer t))
 
 (use-package yasnippet
   :diminish yas-minor-mode
@@ -140,10 +148,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(helm-follow-mode-persistent t)
  '(magit-commit-arguments (quote ("--gpg-sign=999ABCF36AE3B637")))
  '(package-selected-packages
    (quote
-    (ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
+    (helm-projectile helm-ag ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
@@ -153,4 +162,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-)
+ )
