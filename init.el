@@ -39,7 +39,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (global-hl-line-mode 1)
-(global-linum-mode 1)
+(global-linum-mode 0)
 
 ;; --------------------------------------
 
