@@ -12,4 +12,12 @@ Clone this into your home folder as `.emacs.d`. Rember to backup your old `.emac
 git clone https://github.com/tmn/.emacs.d.git ~/.emacs.d
 ```
 
+## Dependencies
+
+### macOS
+
+```
+brew install the_silver_searcher
+```
+
 Cheers!
