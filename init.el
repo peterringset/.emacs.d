@@ -43,6 +43,14 @@
 
 ;; --------------------------------------
 
+(cond
+ ((find-font (font-spec :family "Menlo"))
+  (set-frame-font "Menlo:pixelsize=12"))
+ ((find-font (font-spec :family "Monaco"))
+  (set-fram-font "Monaco:pixelsize=12")))
+
+;; --------------------------------------
+
 (use-package spacemacs-theme
   :init
   (progn
@@ -107,8 +115,6 @@
   (remove-hook 'enh-ruby-mode-hook 'ruby-end-mode)
 )
 
-
-
 (use-package alchemist
   :diminish alchemist-mode
   :init
@@ -124,7 +130,6 @@
 (use-package auto-complete
   :init
   (add-hook 'web-mode-hook 'auto-complete-mode))
-
 
 
 ;; --------------------------------------
