@@ -19,7 +19,7 @@ Install system dependencies for some of the emacs packages.
 ### macOS
 
 ```bash
-brew install the_silver_searcher tern
+brew install the_silver_searcher homebrew/emacs/tern
 ```
 
 ### Linux (apt)
