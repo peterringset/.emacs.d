@@ -2,7 +2,7 @@
 
 **My .emacs.d - use it, break it, fix it, trash it**
 
-This emacs configuration is tested in emacs 25.1 on macOS. Some of the configurations aren't compatible with Windows or Linux, yet.
+This emacs configuration is tested in emacs 25.1 on macOS. Some of the configurations aren't compatible with Windows, yet.
 
 ## Usage
 
