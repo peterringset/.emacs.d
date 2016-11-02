@@ -14,10 +14,18 @@ git clone https://github.com/tmn/.emacs.d.git ~/.emacs.d
 
 ## Dependencies
 
+Install system dependencies for some of the emacs packages.
+
 ### macOS
 
-```
+```bash
 brew install the_silver_searcher
+```
+
+### Linux (apt)
+
+```bash
+apt-get install silversearcher-ag
 ```
 
 Cheers!
