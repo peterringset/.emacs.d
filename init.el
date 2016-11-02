@@ -128,6 +128,28 @@
   :init
   (add-to-list 'elixir-mode-hook (alchemist-mode)))
 
+
+;; (use-package tern
+;;   :init
+;;   (tern-mode t)
+
+;;   (progn
+;;     (use-package tern-auto-complete
+;;       :init
+;;       (tern-ac-setup))))
+
+(use-package js2-mode
+  :mode "\\.js$"
+  :init
+  (setq js2-highlight-level 3)
+  (setq-default js2-basic-offset 2)
+  (setq js-indent-level 2)
+
+  :config
+  (add-hook 'js2-mode-hook 'turn-on-smartparens-mode)
+  (add-hook 'js2-mode-hook (lambda () (flycheck-mode 1)))
+  (add-hook 'js2-mode-hook 'tern-mode))
+
 (use-package web-mode
   :mode "\\.\\(html\\|css\\|less\\|scss\\|js[x]?\\)$"
   :init
