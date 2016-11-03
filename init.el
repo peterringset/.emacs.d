@@ -85,6 +85,55 @@
 (use-package org
   :defer t)
 
+(use-package helm
+  :commands (helm-projectile helm-projectile-ag)
+  :diminish helm-mode
+  :bind (("C-x C-f" . helm-find-files)
+         ("C-x C-b" . helm-buffers-list)
+         ("M-x" . helm-M-x))
+
+  :init
+  (require 'helm-config)
+  (setq-default helm-display-header-line nil
+                helm-M-x-fuzzy-match t
+                helm-apropos-fuzzy-match t
+                helm-buffers-fuzzy-matching t
+                helm-completion-in-region-fuzzy-match t
+                helm-file-cache-fuzzy-match t
+                helm-lisp-fuzzy-completion t
+                helm-mode-fuzzy-match t
+                helm-projectile-fuzzy-match t
+                helm-recentf-fuzzy-match t
+                helm-candidate-number-limit 100
+                helm-prevent-escaping-from-minibuffer t
+                helm-always-two-windows t
+                helm-echo-input-in-header-line t
+
+                ;; keep follow mode on, after on once
+                helm-follow-mode-persistent t
+                helm-ff-skip-boring-files t
+                helm-quick-update t
+                helm-M-x-requires-pattern nil)
+
+  :config
+  (helm-mode 1)
+  (custom-set-variables
+   '(helm-follow-mode-persistent t)))
+
+(use-package helm-ls-git
+  :after helm
+  :bind (("C-x C-d" . helm-browse-project)))
+
+(use-package helm-ag
+  :after helm
+  :commands helm-ag
+  :init
+  (setq helm-ag-fuzzy-match t))
+
+(use-package helm-projectile
+  :after helm
+  :commands helm-projectile)
+
 (use-package projectile
   :commands (projectile-mode helm-projectile)
   :init
@@ -105,29 +154,6 @@
   (add-to-list 'grep-find-ignored-files "**.build.js")
   (add-to-list 'grep-find-ignored-files ".DS_Store")
   (projectile-global-mode))
-
-
-(use-package helm
-  :bind (("C-x C-f" . helm-find-files)
-         ("C-x C-b" . helm-buffers-list)
-         ("M-x" . helm-M-x))
-  :diminish helm-mode
-  :init
-  (require 'helm-config)
-
-  :config
-  (helm-mode 1)
-  (custom-set-variables
-   '(helm-follow-mode-persistent t))
-
-  (use-package helm-ls-git
-    :bind (("C-x C-d" . helm-browse-project)))
-
-  (use-package helm-ag
-    :defer t)
-
-  (use-package helm-projectile
-    :defer t))
 
 (use-package yasnippet
   :diminish yas-minor-mode
