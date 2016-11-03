@@ -56,6 +56,24 @@
   :config
   (exec-path-from-shell-initialize))
 
+(use-package company
+  :init
+  (setq company-idle-delay 0.2
+        company-tooltip-align-annotations t
+        company-tooltip-flip-when-above t
+        company-show-numbers t
+        company-selection-wrap-around t
+        company-require-match nil)
+
+  :config
+  (global-company-mode))
+
+(use-package company-tern
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-tern)
+  (setq tern-command (append tern-command '("--no-port-file"))))
+
 (use-package spacemacs-theme
   :init
   (progn
