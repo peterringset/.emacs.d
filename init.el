@@ -62,6 +62,28 @@
 (use-package org
   :defer t)
 
+(use-package projectile
+  :commands (projectile-mode helm-projectile)
+  :init
+  (setq projectile-mode-line '(:eval (format "[%s]" (projectile-project-name)))
+        projectile-known-projects-file (locate-user-emacs-file ".projectile-bookmarks.eld")
+        projectile-completion-system 'helm)
+
+  :config
+  (add-to-list 'projectile-globally-ignored-directories "elpa-backups")
+  (add-to-list 'projectile-globally-ignored-directories "node_modules")
+  (add-to-list 'projectile-globally-ignored-directories "target")
+  (add-to-list 'projectile-globally-ignored-directories "dist")
+  (add-to-list 'projectile-globally-ignored-directories ".idea")
+  (add-to-list 'projectile-globally-ignored-files "**.bundle.js")
+  (add-to-list 'projectile-globally-ignored-files "**.build.js")
+  (add-to-list 'projectile-globally-ignored-files ".DS_Store")
+  (add-to-list 'grep-find-ignored-files "**.bundle.js")
+  (add-to-list 'grep-find-ignored-files "**.build.js")
+  (add-to-list 'grep-find-ignored-files ".DS_Store")
+  (projectile-global-mode))
+
+
 (use-package helm
   :bind (("C-x C-f" . helm-find-files)
          ("C-x C-b" . helm-buffers-list)
@@ -176,6 +198,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(helm-follow-mode-persistent t)
+ '(helm-source-names-using-follow (quote ("Search at ~/.emacs.d/")))
  '(magit-commit-arguments (quote ("--gpg-sign=999ABCF36AE3B637")))
  '(package-selected-packages
    (quote
