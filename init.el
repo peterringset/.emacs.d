@@ -51,6 +51,11 @@
 
 ;; --------------------------------------
 
+(use-package exec-path-from-shell
+  :if (equal system-type 'darwin)
+  :config
+  (exec-path-from-shell-initialize))
+
 (use-package spacemacs-theme
   :init
   (progn
