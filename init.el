@@ -209,6 +209,11 @@
 ;;       :init
 ;;       (tern-ac-setup))))
 
+(use-package flycheck
+  :commands flycheck-mode
+  :config
+  (flycheck-add-mode 'javascript-eslint 'web-mode))
+
 (use-package js2-mode
   :mode "\\.js$"
   :init
