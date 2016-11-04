@@ -136,7 +136,9 @@
 
 (use-package helm-projectile
   :after helm
-  :commands helm-projectile)
+  :commands helm-projectile
+  :init
+  (setq helm-projectile-fuzzy-match t))
 
 (use-package projectile
   :commands (projectile-mode helm-projectile)
