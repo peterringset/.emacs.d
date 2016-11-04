@@ -42,6 +42,6 @@ Tern can be installed through npm on all platforms, or brew in macOS:
 brew install homebrew/emacs/tern
 ```
 
-For other installations methods. See [ternjs.net](ternjs.net)
+For other installations methods. See [ternjs.net](http://ternjs.net)
 
 Cheers!
