@@ -164,7 +164,9 @@
   (yas-global-mode 1))
 
 (use-package elm-mode
-  :mode "\\.elm$")
+  :mode "\\.elm$"
+  :init
+  (setq elm-format-on-save t))
 
 (use-package neotree
   :bind (("C-x p" . neotree-toggle)))
