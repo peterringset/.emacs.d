@@ -199,16 +199,6 @@
   :init
   (add-to-list 'elixir-mode-hook (alchemist-mode)))
 
-
-;; (use-package tern
-;;   :init
-;;   (tern-mode t)
-
-;;   (progn
-;;     (use-package tern-auto-complete
-;;       :init
-;;       (tern-ac-setup))))
-
 (use-package flycheck
   :commands flycheck-mode
   :config
