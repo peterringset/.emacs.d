@@ -51,6 +51,28 @@
 
 ;; --------------------------------------
 
+(use-package projectile
+  :commands (projectile-mode helm-projectile)
+  :init
+  (setq projectile-mode-line '(:eval (format "[%s]" (projectile-project-name)))
+        projectile-known-projects-file (locate-user-emacs-file ".projectile-bookmarks.eld")
+        projectile-completion-system 'helm)
+
+  :config
+  (add-to-list 'projectile-globally-ignored-directories "elpa-backups")
+  (add-to-list 'projectile-globally-ignored-directories "node_modules")
+  (add-to-list 'projectile-globally-ignored-directories "target")
+  (add-to-list 'projectile-globally-ignored-directories "dist")
+  (add-to-list 'projectile-globally-ignored-directories ".idea")
+  (add-to-list 'projectile-globally-ignored-files "**.bundle.js")
+  (add-to-list 'projectile-globally-ignored-files "**.build.js")
+  (add-to-list 'projectile-globally-ignored-files ".DS_Store")
+  (add-to-list 'grep-find-ignored-files "**.bundle.js")
+  (add-to-list 'grep-find-ignored-files "**.build.js")
+  (add-to-list 'grep-find-ignored-files ".DS_Store")
+  (projectile-global-mode))
+
+
 (use-package highlight-parentheses
   :config
   (global-highlight-parentheses-mode 1))
@@ -89,8 +111,10 @@
 (use-package org
   :defer t)
 
+
+
 (use-package helm
-  :commands (helm-projectile helm-projectile-ag)
+  :commands (helm-mini helm-projectile helm-projectile-ag)
   :diminish helm-mode
   :bind (("C-x C-f" . helm-find-files)
          ("C-x C-b" . helm-buffers-list)
@@ -120,46 +144,32 @@
                 helm-M-x-requires-pattern nil)
 
   :config
-  (helm-mode 1)
-  (custom-set-variables
-   '(helm-follow-mode-persistent t)))
-
-(use-package helm-ls-git
-  :after helm
-  :bind (("C-x C-d" . helm-browse-project)))
+  (progn
+    (helm-mode 1)
+    (set-face-attribute 'helm-source-header nil :height 1)
+    (custom-set-variables
+     '(helm-follow-mode-persistent t))))
 
 (use-package helm-ag
   :after helm
   :commands helm-ag
   :init
-  (setq helm-ag-fuzzy-match t))
+  (setq helm-ag-fuzzy-match t
+        helm-ag-insert-at-point 'symbol
+        helm-ag-use-grep-ignore-list t
+        helm-ag-edit-save t))
 
 (use-package helm-projectile
   :after helm
-  :commands helm-projectile
-  :init
-  (setq helm-projectile-fuzzy-match t))
+  :commands helm-projectile)
+  ;; :init
+  ;; (setq helm-projectile-fuzzy-match t))
 
-(use-package projectile
-  :commands (projectile-mode helm-projectile)
-  :init
-  (setq projectile-mode-line '(:eval (format "[%s]" (projectile-project-name)))
-        projectile-known-projects-file (locate-user-emacs-file ".projectile-bookmarks.eld")
-        projectile-completion-system 'helm)
 
-  :config
-  (add-to-list 'projectile-globally-ignored-directories "elpa-backups")
-  (add-to-list 'projectile-globally-ignored-directories "node_modules")
-  (add-to-list 'projectile-globally-ignored-directories "target")
-  (add-to-list 'projectile-globally-ignored-directories "dist")
-  (add-to-list 'projectile-globally-ignored-directories ".idea")
-  (add-to-list 'projectile-globally-ignored-files "**.bundle.js")
-  (add-to-list 'projectile-globally-ignored-files "**.build.js")
-  (add-to-list 'projectile-globally-ignored-files ".DS_Store")
-  (add-to-list 'grep-find-ignored-files "**.bundle.js")
-  (add-to-list 'grep-find-ignored-files "**.build.js")
-  (add-to-list 'grep-find-ignored-files ".DS_Store")
-  (projectile-global-mode))
+(use-package helm-ls-git
+  :after helm
+  :bind (("C-x C-d" . helm-browse-project)))
+
 
 (use-package yasnippet
   :diminish yas-minor-mode
