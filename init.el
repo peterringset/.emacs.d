@@ -161,9 +161,6 @@
 (use-package helm-projectile
   :after helm
   :commands helm-projectile)
-  ;; :init
-  ;; (setq helm-projectile-fuzzy-match t))
-
 
 (use-package helm-ls-git
   :after helm
