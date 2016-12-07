@@ -111,12 +111,11 @@
 (use-package org
   :defer t)
 
-
-
 (use-package helm
   :commands (helm-mini helm-projectile helm-projectile-ag)
   :diminish helm-mode
-  :bind (("C-x C-f" . helm-find-files)
+  :bind (("C-x j" . helm-projectile-ag)
+         ("C-x C-f" . helm-find-files)
          ("C-x C-b" . helm-buffers-list)
          ("M-x" . helm-M-x))
 
