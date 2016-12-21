@@ -30,16 +30,36 @@
 (setq use-package-always-ensure t)
 (setq x-select-enable-clipboard t)
 
-(defadvice linum-update-window (around linum-dynamic activate)
-  (let* ((w (length (number-to-string
-                     (count-lines (point-min) (point-max)))))
-         (linum-format (concat " %" (number-to-string w) "d ")))
-    ad-do-it))
+(when (eq system-type 'darwin)
+  (require 'ls-lisp)
+  (setq ls-lisp-use-insert-directory-program nil))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (global-hl-line-mode 1)
-(global-linum-mode 0)
+
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
+ '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
+ '(column-number-mode t)
+ '(helm-follow-mode-persistent t)
+ '(helm-source-names-using-follow (quote ("Search at ~/.emacs.d/")))
+ '(magit-commit-arguments (quote ("--gpg-sign=999ABCF36AE3B637")))
+ '(package-selected-packages
+   (quote
+    (ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
+ '(scroll-bar-mode nil)
+ '(standard-indent 2)
+ '(tool-bar-mode nil))
+
+;; create the autosave dir if necessary, since emacs won't.
+(make-directory "~/.emacs.d/autosaves/" t)
+
 
 ;; --------------------------------------
 
@@ -206,12 +226,12 @@
   :config
   (remove-hook 'ruby-mode-hook 'ruby-end-mode)
   (remove-hook 'enh-ruby-mode-hook 'ruby-end-mode)
-)
+  )
 
-(use-package alchemist
-  :diminish alchemist-mode
-  :init
-  (add-to-list 'elixir-mode-hook (alchemist-mode)))
+;; (use-package alchemist
+;;   :diminish alchemist-mode
+;;   :init
+;;   (add-to-list 'elixir-mode-hook (alchemist-mode)))
 
 (use-package flycheck
   :commands flycheck-mode
@@ -234,7 +254,6 @@
   (setq js-indent-level 2)
 
   :config
-  (add-hook 'js2-mode-hook 'turn-on-smartparens-mode)
   (add-hook 'js2-mode-hook (lambda () (flycheck-mode 1)))
   (add-hook 'js2-mode-hook 'tern-mode))
 
@@ -257,21 +276,6 @@
 
 ;; --------------------------------------
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(helm-follow-mode-persistent t)
- '(helm-source-names-using-follow (quote ("Search at ~/.emacs.d/")))
- '(magit-commit-arguments (quote ("--gpg-sign=999ABCF36AE3B637")))
- '(package-selected-packages
-   (quote
-    (highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
- '(scroll-bar-mode nil)
- '(standard-indent 2)
- '(tool-bar-mode nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
