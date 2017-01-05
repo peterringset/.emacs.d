@@ -52,7 +52,7 @@
  '(magit-commit-arguments (quote ("--gpg-sign=999ABCF36AE3B637")))
  '(package-selected-packages
    (quote
-    (ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
+    (php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
@@ -159,8 +159,6 @@
                 helm-prevent-escaping-from-minibuffer t
                 helm-always-two-windows t
                 helm-echo-input-in-header-line t
-
-                ;; keep follow mode on, after on once
                 helm-follow-mode-persistent t
                 helm-ff-skip-boring-files t
                 helm-quick-update t
@@ -169,9 +167,8 @@
   :config
   (progn
     (helm-mode 1)
-    (set-face-attribute 'helm-source-header nil :height 1)
-    (custom-set-variables
-     '(helm-follow-mode-persistent t))))
+    (set-face-attribute 'helm-source-header nil :height 1)))
+
 (use-package helm-hunks
   :commands (helm-hunks
              helm-hunks-current-buffer
