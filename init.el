@@ -30,9 +30,9 @@
 (setq use-package-always-ensure t)
 (setq x-select-enable-clipboard t)
 
-;; (when (eq system-type 'darwin)
-;;   (require 'ls-lisp)
-;;   (setq ls-lisp-use-insert-directory-program nil))
+(when (eq system-type 'windows-nt)
+  (require 'ls-lisp)
+  (setq ls-lisp-use-insert-directory-program nil))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
