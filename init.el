@@ -213,7 +213,21 @@
   :defer t)
 
 (use-package neotree
-  :bind (("C-x p" . neotree-toggle)))
+  :commands (neotree-toggle
+             neotree-show
+             neotree-hide
+             neotree-find)
+  :bind (([f5] . neotree-toggle))
+  :init
+  (when (eq system-type 'darwin)
+    (setq neo-theme 'icons
+          neo-window-width 35))
+
+  :config
+  (add-hook 'neotree-mode-hook
+            (lambda ()
+              (bind-key "R" 'neotree-rename-node)
+              )))
 
 (use-package erlang
   :mode "\\.erl$")
