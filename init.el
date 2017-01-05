@@ -17,8 +17,8 @@
 (defconst +emacs-conf-dir+ (concat +emacs-dir+ "/configs"))
 (defconst +emacs-snippets-dir+ (concat +emacs-dir+ "/snippets"))
 
-(defun load-config (f)
-  (load-file (concat +emacs-conf-dir+ "/" f ".el")))
+;; (defun load-config (f)
+;;   (load-file (concat +emacs-conf-dir+ "/" f ".el")))
 
 (setq-default indent-tabs-mode nil)
 (setq-default line-spacing 5)
@@ -30,9 +30,9 @@
 (setq use-package-always-ensure t)
 (setq x-select-enable-clipboard t)
 
-(when (eq system-type 'darwin)
-  (require 'ls-lisp)
-  (setq ls-lisp-use-insert-directory-program nil))
+;; (when (eq system-type 'darwin)
+;;   (require 'ls-lisp)
+;;   (setq ls-lisp-use-insert-directory-program nil))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
