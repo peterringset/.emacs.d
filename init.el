@@ -194,8 +194,8 @@
 
 
 (use-package yasnippet
-  :commands yas-expand
-                                        ; :diminish yas-minor-mode
+  :diminish yas-minor-mode
+  :defer 1
   :init
   (setq yas-snippet-dirs '(+emacs-snippets-dir+))
 
