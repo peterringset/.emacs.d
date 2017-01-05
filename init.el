@@ -52,7 +52,7 @@
  '(magit-commit-arguments (quote ("--gpg-sign=999ABCF36AE3B637")))
  '(package-selected-packages
    (quote
-    (php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
+    (wgrep-ag wgrep ag php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
@@ -72,10 +72,10 @@
 ;; --------------------------------------
 
 (use-package projectile
-  :commands (projectile-mode helm-projectile)
+  :commands (projectile-mode helm-projectile projectile-project-root)
   :init
   (setq projectile-mode-line '(:eval (format "[%s]" (projectile-project-name)))
-        projectile-known-projects-file (locate-user-emacs-file ".projectile-bookmarks.eld")
+        projectile-require-project-root nil
         projectile-completion-system 'helm)
 
   :config
@@ -98,8 +98,10 @@
   (add-to-list 'grep-find-ignored-files ".DS_Store"))
 
 (use-package highlight-parentheses
-  :config
-  (global-highlight-parentheses-mode 1))
+  :diminish highlight-parentheses-mode
+  :commands highlight-parentheses-mode
+  :init
+  (add-hook 'prog-mode-hook 'highlight-parentheses-mode))
 
 (use-package exec-path-from-shell
   :if (equal system-type 'darwin)
@@ -107,6 +109,7 @@
   (exec-path-from-shell-initialize))
 
 (use-package company
+  :commands company-mode
   :init
   (setq company-idle-delay 0.2
         company-tooltip-align-annotations t
@@ -114,9 +117,7 @@
         company-show-numbers t
         company-selection-wrap-around t
         company-require-match nil)
-
-  :config
-  (global-company-mode))
+  (add-hook 'prog-mode-hook 'company-mode))
 
 (use-package company-tern
   :after company
@@ -125,15 +126,29 @@
   (setq tern-command (append tern-command '("--no-port-file"))))
 
 (use-package spacemacs-theme
+  :defer t
   :init
-  (progn
-    (load-theme 'spacemacs-dark t)))
+  (load-theme 'spacemacs-dark t))
 
 (use-package magit
+  :commands magit-status
   :bind (("C-x g" . magit-status)))
 
 (use-package org
   :defer t)
+
+(use-package ag
+  :commands ag
+  :config
+  (setq ag-reuse-buffers t
+        ag-highlight-search t
+        ag-project-root-function (lambda () (projectile-project-root))))
+
+(use-package wgrep
+  :after ag)
+
+(use-package wgrep-ag
+  :after ag)
 
 (use-package helm
   :commands (helm-mini helm-projectile helm-projectile-ag)
@@ -167,7 +182,8 @@
   :config
   (progn
     (helm-mode 1)
-    (set-face-attribute 'helm-source-header nil :height 1)))
+    (set-face-attribute 'helm-source-header nil :height 1)
+    (add-hook 'helm-before-initialize-hook 'neotree-hide)))
 
 (use-package helm-hunks
   :commands (helm-hunks
@@ -202,11 +218,6 @@
   :config
   (yas-global-mode 1))
 
-(use-package elm-mode
-  :mode "\\.elm$"
-  :init
-  (setq elm-format-on-save t))
-
 (use-package all-the-icons
   :defer t)
 
@@ -217,9 +228,15 @@
              neotree-find)
   :bind (([f5] . neotree-toggle))
   :init
+  (setq neo-window-width 35
+        neo-smart-open nil
+        neo-create-file-auto-open t
+        neo-show-updir-line nil
+        neo-dont-be-alone t
+        neo-show-hidden-files t
+        neo-auto-indent-point t)
   (when (eq system-type 'darwin)
-    (setq neo-theme 'icons
-          neo-window-width 35))
+    (setq neo-theme 'icons))
 
   :config
   (add-hook 'neotree-mode-hook
@@ -232,6 +249,11 @@
 
 (use-package elixir-mode
   :mode "\\.\\(ex[s]\\|elixir\\)$")
+
+(use-package elm-mode
+  :mode "\\.elm$"
+  :init
+  (setq elm-format-on-save t))
 
 (use-package ruby-end
   :diminish ruby-end-mode
@@ -249,18 +271,21 @@
 
   :config
   (remove-hook 'ruby-mode-hook 'ruby-end-mode)
-  (remove-hook 'enh-ruby-mode-hook 'ruby-end-mode)
-  )
+  (remove-hook 'enh-ruby-mode-hook 'ruby-end-mode))
 
-;; (use-package alchemist
-;;   :diminish alchemist-mode
-;;   :init
-;;   (add-to-list 'elixir-mode-hook (alchemist-mode)))
+(use-package alchemist
+  :diminish alchemist-mode
+  :init
+  (add-to-list 'elixir-mode-hook (alchemist-mode)))
 
 (use-package flycheck
   :commands flycheck-mode
   :config
-  (flycheck-add-mode 'javascript-eslint 'web-mode))
+  (progn
+    (flycheck-add-mode 'javascript-eslint 'web-mode)
+    (flycheck-add-mode 'javascript-eslint 'js2-mode)
+    (flycheck-add-mode 'css-csslint 'web-mode)
+    (flycheck-add-mode 'css-csslint 'less-css-mode)))
 
 (use-package js2-mode
   :mode "\\.js$"
@@ -296,13 +321,12 @@
   :mode "\\.less$"
   :config
   (add-hook 'less-css-mode-hook (lambda ()
-                                  (setq indent-tabs-mode nil)
-                                  (setq tab-width 2))))
+                                  (setq css-indent-offset 2))))
 
-(use-package auto-complete
-  :diminish auto-complete-mode
-  :init
-  (add-hook 'web-mode-hook 'auto-complete-mode))
+;; (use-package auto-complete
+;;   :diminish auto-complete-mode
+;;   :init
+;;   (add-hook 'web-mode-hook 'auto-complete-mode))
 
 
 ;; --------------------------------------
