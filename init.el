@@ -209,6 +209,9 @@
   :init
   (setq elm-format-on-save t))
 
+(use-package all-the-icons
+  :defer t)
+
 (use-package neotree
   :bind (("C-x p" . neotree-toggle)))
 
