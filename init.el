@@ -172,6 +172,11 @@
     (set-face-attribute 'helm-source-header nil :height 1)
     (custom-set-variables
      '(helm-follow-mode-persistent t))))
+(use-package helm-hunks
+  :commands (helm-hunks
+             helm-hunks-current-buffer
+             helm-hunks-staged
+             helm-hunks-staged-current-buffer))
 
 (use-package helm-ag
   :after helm
