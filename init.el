@@ -294,6 +294,16 @@
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2))
 
+(use-package less-css-mode
+  :mode "\\.less$"
+  :config
+  (add-hook 'less-css-mode-hook (lambda ()
+                             (setq indent-tabs-mode nil)
+                             (setq tab-width 2))))
+
+
+
+
 (use-package auto-complete
   :diminish auto-complete-mode
   :init
