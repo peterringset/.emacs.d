@@ -157,7 +157,7 @@
          ("C-x C-f" . helm-find-files)
          ("C-x C-b" . helm-buffers-list)
          ("C-x c y" . helm-show-kill-ring)
-         ("C-s" . helm-ag-this-file)
+         ("C-x c s" . helm-ag-this-file)
          ("M-x" . helm-M-x))
 
   :init
