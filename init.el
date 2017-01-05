@@ -86,12 +86,16 @@
   (add-to-list 'projectile-globally-ignored-directories ".idea")
   (add-to-list 'projectile-globally-ignored-files "**.bundle.js")
   (add-to-list 'projectile-globally-ignored-files "**.build.js")
+  (add-to-list 'projectile-globally-ignored-files "**.bundle.css")
   (add-to-list 'projectile-globally-ignored-files ".DS_Store")
+  (add-to-list 'projectile-globally-ignored-files "**.min.js")
+  (add-to-list 'projectile-globally-ignored-files "**.min.css")
   (add-to-list 'grep-find-ignored-files "**.bundle.js")
   (add-to-list 'grep-find-ignored-files "**.build.js")
-  (add-to-list 'grep-find-ignored-files ".DS_Store")
-  (projectile-global-mode))
-
+  (add-to-list 'grep-find-ignored-files "**.bundle.css")
+  (add-to-list 'grep-find-ignored-files "**.min.js")
+  (add-to-list 'grep-find-ignored-files "**.min.css")
+  (add-to-list 'grep-find-ignored-files ".DS_Store"))
 
 (use-package highlight-parentheses
   :config
