@@ -21,7 +21,7 @@
 ;;   (load-file (concat +emacs-conf-dir+ "/" f ".el")))
 
 (setq-default indent-tabs-mode nil)
-(setq-default line-spacing 5)
+(setq-default line-spacing 6)
 
 (setq inhibit-startup-screen t)
 (setq mac-command-modifier 'meta)
