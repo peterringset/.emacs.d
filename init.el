@@ -153,9 +153,11 @@
 (use-package helm
   :commands (helm-mini helm-projectile helm-projectile-ag)
   :diminish helm-mode
-  :bind (("C-x j" . helm-projectile-ag)
+  :bind (("C-x c f" . helm-projectile-ag)
          ("C-x C-f" . helm-find-files)
          ("C-x C-b" . helm-buffers-list)
+         ("C-x c y" . helm-show-kill-ring)
+         ("C-s" . helm-ag-this-file)
          ("M-x" . helm-M-x))
 
   :init
