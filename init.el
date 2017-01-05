@@ -296,11 +296,8 @@
   :mode "\\.less$"
   :config
   (add-hook 'less-css-mode-hook (lambda ()
-                             (setq indent-tabs-mode nil)
-                             (setq tab-width 2))))
-
-
-
+                                  (setq indent-tabs-mode nil)
+                                  (setq tab-width 2))))
 
 (use-package auto-complete
   :diminish auto-complete-mode
