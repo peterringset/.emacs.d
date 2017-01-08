@@ -1,4 +1,6 @@
 (setq gc-cons-threshold 50000000)
+(setq gnutls-min-prime-bits 4096)
+
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
