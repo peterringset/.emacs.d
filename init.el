@@ -26,6 +26,8 @@
 
 (setq-default indent-tabs-mode nil)
 (setq-default line-spacing 6)
+(setq-default tab-always-indent 'complete)
+(setq tab-width 2)
 
 (setq inhibit-startup-screen t)
 (setq mac-command-modifier 'meta)
