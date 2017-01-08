@@ -2,10 +2,11 @@
 (setq gnutls-min-prime-bits 4096)
 
 (require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ("melpa-stalbe" . "http://stable.melpa.org/packages/")))
+(setq package-archives '(("org" . "http://orgmode.org/elpa/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
+;; (package-refresh-contents)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
