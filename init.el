@@ -273,6 +273,9 @@
   :after helm
   :bind (("C-x C-d" . helm-browse-project)))
 
+(use-package helm-dash
+  :after helm
+  :commands helm-dash)
 
 (use-package yasnippet
   :diminish yas-minor-mode
