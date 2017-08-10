@@ -6,7 +6,6 @@
                          ("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
-;; (package-refresh-contents)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -20,9 +19,6 @@
 (defconst +emacs-dir+ "~/.emacs.d")
 (defconst +emacs-conf-dir+ (concat +emacs-dir+ "/configs"))
 (defconst +emacs-snippets-dir+ (concat +emacs-dir+ "/snippets"))
-
-;; (defun load-config (f)
-;;   (load-file (concat +emacs-conf-dir+ "/" f ".el")))
 
 (setq-default indent-tabs-mode nil)
 (setq-default line-spacing 6)
@@ -72,8 +68,6 @@
 (cond
  ((find-font (font-spec :family "Fira Code Retina"))
   (set-frame-font "Fira Code Retina:pixelsize=12"))
- ((find-font (font-spec :family "Hasklig"))
-  (set-frame-font "Hasklig:pixelsize=12"))
  ((find-font (font-spec :family "Menlo"))
   (set-frame-font "Menlo:pixelsize=12"))
  ((find-font (font-spec :family "Monaco"))
@@ -150,15 +144,16 @@
   :ensure t
   :bind (("C-c C-. ."   . mc/mark-all-dwim)
          ("C-c C-. C-." . mc/mark-all-like-this-dwim)
-         ("C-c C-. n"   . mc/mark-next-like-this)
-         ("C-c C-. p"   . mc/mark-previous-like-this)
          ("C-c C-. a"   . mc/mark-all-like-this)
          ("C-c C-. N"   . mc/mark-next-symbol-like-this)
          ("C-c C-. P"   . mc/mark-previous-symbol-like-this)
          ("C-c C-. A"   . mc/mark-all-symbols-like-this)
          ("C-c C-. f"   . mc/mark-all-like-this-in-defun)
          ("C-c C-. l"   . mc/edit-lines)
-         ("C-c C-. e"   . mc/edit-ends-of-lines)))
+         ("C-c C-. e"   . mc/edit-ends-of-lines)
+         ("C->"         . mc/mark-next-like-this)
+         ("C-<"         . mc/mark-previous-like-this)
+         ("C-c C-<"     . mc/mark-all-like-this-dwim)))
 
 (use-package highlight-parentheses
   :diminish highlight-parentheses-mode
@@ -173,6 +168,7 @@
 
 (use-package company
   :commands company-mode
+  :diminish company-mode tern-mode
   :init
   (setq company-idle-delay 0.2
         company-tooltip-align-annotations t
@@ -188,10 +184,10 @@
   (add-to-list 'company-backends 'company-tern)
   (setq tern-command (append tern-command '("--no-port-file"))))
 
-(use-package spacemacs-theme
+(use-package doom-themes
   :defer t
   :init
-  (load-theme 'spacemacs-dark t))
+  (load-theme 'doom-vibrant t))
 
 (use-package magit
   :commands magit-status
@@ -309,14 +305,8 @@
   :config
   (add-hook 'neotree-mode-hook
             (lambda ()
-              (bind-key "R" 'neotree-rename-node)
+              ;; (bind-key "R" 'neotree-rename-node)
               )))
-
-(use-package erlang
-  :mode "\\.erl$")
-
-(use-package elixir-mode
-  :mode "\\.\\(ex[s]\\|elixir\\)$")
 
 (use-package elm-mode
   :mode "\\.elm$"
@@ -341,13 +331,9 @@
   (remove-hook 'ruby-mode-hook 'ruby-end-mode)
   (remove-hook 'enh-ruby-mode-hook 'ruby-end-mode))
 
-(use-package alchemist
-  :diminish alchemist-mode
-  :init
-  (add-to-list 'elixir-mode-hook (alchemist-mode)))
-
 (use-package flycheck
   :commands flycheck-mode
+  :diminish flycheck-mode
   :config
   (progn
     (flycheck-add-mode 'javascript-eslint 'web-mode)
@@ -390,11 +376,6 @@
   :config
   (add-hook 'less-css-mode-hook (lambda ()
                                   (setq css-indent-offset 2))))
-
-;; (use-package auto-complete
-;;   :diminish auto-complete-mode
-;;   :init
-;;   (add-hook 'web-mode-hook 'auto-complete-mode))
 
 
 ;; --------------------------------------
