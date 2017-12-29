@@ -311,6 +311,8 @@
 (use-package json-mode
   :defer t)
 
+(use-package markdown-mode
+  :defer t)
 
 (use-package ruby-end
   :diminish ruby-end-mode
