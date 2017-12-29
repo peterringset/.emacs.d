@@ -54,7 +54,7 @@
  ;; '(magit-commit-arguments (quote ("--gpg-sign=<>")))
  '(package-selected-packages
    (quote
-    (wgrep-ag wgrep ag php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
+    (ember-mode helm-dash wgrep-ag wgrep ag php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end org tern-auto-complete tern yasnippet helm-ls-git helm web-mode doom-themes neotree markdown-mode magit less-css-mode jsx-mode js2-mode dash-functional ac-math ac-html)))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
