@@ -311,6 +311,9 @@
 (use-package json-mode
   :defer t)
 
+(use-package ember-mode
+  :defer t)
+
 (use-package markdown-mode
   :defer t)
 
