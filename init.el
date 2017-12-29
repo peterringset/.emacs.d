@@ -308,6 +308,9 @@
               ;; (bind-key "R" 'neotree-rename-node)
               )))
 
+(use-package json-mode
+  :defer t)
+
 
 (use-package ruby-end
   :diminish ruby-end-mode
