@@ -326,8 +326,6 @@
     (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
     (ruby-end-mode +1))
 
-  (add-hook 'elixir-mode-hook 'ruby-end)
-
   (remove-hook 'ruby-mode-hook 'ruby-end-mode)
   (remove-hook 'enh-ruby-mode-hook 'ruby-end-mode)
 
