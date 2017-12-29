@@ -308,10 +308,6 @@
               ;; (bind-key "R" 'neotree-rename-node)
               )))
 
-(use-package elm-mode
-  :mode "\\.elm$"
-  :init
-  (setq elm-format-on-save t))
 
 (use-package ruby-end
   :diminish ruby-end-mode
