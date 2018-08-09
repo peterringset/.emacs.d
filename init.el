@@ -12,6 +12,7 @@
   (package-install 'use-package))
 
 (eval-when-compile (require 'use-package))
+
 (require 'diminish)
 (require 'bind-key)
 
@@ -40,6 +41,7 @@
 
 (global-hl-line-mode 1)
 
+
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -54,7 +56,7 @@
  ;; '(magit-commit-arguments (quote ("--gpg-sign=<>")))
  '(package-selected-packages
    (quote
-    (ember-mode helm-dash wgrep-ag wgrep ag php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end org tern-auto-complete tern yasnippet helm-ls-git helm web-mode doom-themes neotree markdown-mode magit less-css-mode jsx-mode js2-mode dash-functional ac-math ac-html)))
+    (ember-mode editorconfig evil-anzu eldoc-eval projectile doom-themes helm-dash multiple-cursors wgrep-ag wgrep ag php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
@@ -182,12 +184,18 @@
 
 (use-package company-tern
   :after company
+  :diminish company-mode tern-mode
   :config
   (add-to-list 'company-backends 'company-tern)
   (setq tern-command (append tern-command '("--no-port-file"))))
 
 (use-package doom-themes
   :defer t
+  :config
+  (progn
+    (setq doom-themes-enable-bold t         ; if nil, bolding are universally disabled
+          doom-themes-enable-italic t)      ; if nil, italics are universally disabled
+    (doom-themes-visual-bell-config))
   :init
   (load-theme 'doom-vibrant t))
 
@@ -303,12 +311,12 @@
         neo-auto-indent-point t)
   (when (eq system-type 'darwin)
     (setq neo-theme 'icons))
+)
 
+(use-package editorconfig
+  :ensure t
   :config
-  (add-hook 'neotree-mode-hook
-            (lambda ()
-              ;; (bind-key "R" 'neotree-rename-node)
-              )))
+  (editorconfig-mode 1))
 
 (use-package json-mode
   :defer t)
@@ -380,7 +388,6 @@
   :config
   (add-hook 'less-css-mode-hook (lambda ()
                                   (setq css-indent-offset 2))))
-
 
 ;; --------------------------------------
 
