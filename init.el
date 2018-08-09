@@ -13,7 +13,9 @@
 
 (eval-when-compile (require 'use-package))
 
-(require 'diminish)
+(use-package diminish
+  :defer t)
+
 (require 'bind-key)
 
 ;; Directories
