@@ -37,6 +37,9 @@
   (require 'ls-lisp)
   (setq ls-lisp-use-insert-directory-program nil))
 
+(when (eq system-type 'darwin)
+  (setq dired-use-ls-dired nil))
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (global-hl-line-mode 1)
