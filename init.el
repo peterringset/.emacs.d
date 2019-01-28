@@ -53,15 +53,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
- '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
+ '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
+ '(backup-directory-alist '((".*" . "~/.emacs.d/backups/")))
  '(column-number-mode t)
  '(helm-follow-mode-persistent t)
- '(helm-source-names-using-follow (quote ("Search at ~/.emacs.d/")))
  ;; '(magit-commit-arguments (quote ("--gpg-sign=<>")))
+ '(helm-source-names-using-follow '("Search at ~/.emacs.d/"))
  '(package-selected-packages
-   (quote
-    (ember-mode editorconfig evil-anzu eldoc-eval projectile doom-themes helm-dash multiple-cursors wgrep-ag wgrep ag php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end alchemist elixir-mode erlang org tern-auto-complete tern yasnippet helm-ls-git helm web-mode sublime-themes spacemacs-theme spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
+   '(yaml-mode company-tern company diminish swift-mode ember-mode editorconfig evil-anzu eldoc-eval projectile doom-themes helm-dash multiple-cursors wgrep-ag wgrep ag php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end org tern-auto-complete tern yasnippet helm-ls-git helm web-mode spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
@@ -309,6 +308,7 @@
   :init
   (setq neo-window-width 35
         neo-smart-open nil
+        neo-window-fixed-size nil
         neo-create-file-auto-open t
         neo-show-updir-line nil
         neo-dont-be-alone t
@@ -319,6 +319,7 @@
 )
 
 (use-package editorconfig
+  :diminish editorconfig-mode
   :ensure t
   :config
   (editorconfig-mode 1))
@@ -351,6 +352,7 @@
 (use-package flycheck
   :commands flycheck-mode
   :diminish flycheck-mode
+  :init (global-flycheck-mode)
   :config
   (progn
     (flycheck-add-mode 'javascript-eslint 'web-mode)
@@ -378,7 +380,7 @@
   (add-hook 'js2-mode-hook 'tern-mode))
 
 (use-package web-mode
-  :mode "\\.\\(html\\|css\\|less\\|scss\\|jsx\\|hbs\\)$"
+  :mode "\\.\\(html\\|css\\|less\\|scss\\|jsx\\|hbs\\|php\\)$"
   :init
   (setq web-mode-content-types-alist
         '(("jsx" . "\\.js[x]?\\'")
@@ -393,6 +395,10 @@
   :config
   (add-hook 'less-css-mode-hook (lambda ()
                                   (setq css-indent-offset 2))))
+
+(use-package yaml-mode
+  :defer t)
+
 
 ;; --------------------------------------
 
