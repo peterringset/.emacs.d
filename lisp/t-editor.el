@@ -59,5 +59,7 @@
          ("\\.rst$" . rst-mode)
          ("\\.rest$" . rst-mode)))
 
+(defvar smerge-command-prefix "\C-cv")
+
 (provide 't-editor)
 ;;; t-editor.el ends here
