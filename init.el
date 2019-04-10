@@ -208,6 +208,8 @@
   :commands magit-status
   :bind (("C-x g" . magit-status)))
 
+(setq smerge-command-prefix "\C-cv")
+
 (use-package org
   :defer t)
 
