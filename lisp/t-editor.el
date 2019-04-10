@@ -10,7 +10,8 @@
           doom-themes-enable-italic t)      ; if nil, italics are universally disabled
     (doom-themes-visual-bell-config))
   :init
-  (load-theme 'doom-vibrant t))
+  (load-theme 'doom-vibrant t)
+  (set-background-color "#1E1E1E"))
 
 (use-package doom-modeline
       :ensure t
