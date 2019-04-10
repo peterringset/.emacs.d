@@ -61,5 +61,7 @@
 
 (defvar smerge-command-prefix "\C-cv")
 
+(set-frame-size (selected-frame) 150 50)
+
 (provide 't-editor)
 ;;; t-editor.el ends here
