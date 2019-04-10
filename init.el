@@ -402,6 +402,7 @@
 (use-package yaml-mode
   :defer t)
 
+(set-frame-size (selected-frame) 150 50)
 
 ;; --------------------------------------
 
