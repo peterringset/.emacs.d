@@ -30,18 +30,10 @@ apt-get install silversearcher-ag
 
 ## Other dependencies
 
-### elm-format
 
-For elm-format to work you need to add elm-format to your system PATH. Download elm-format at [github.com/avh4/elm-format](https://github.com/avh4/elm-format)
+* typescript-language-server
+* javascript-typescript-langserver
+* typescript
 
-### tern
-
-Tern can be installed through npm on all platforms, or brew in macOS:
-
-```bash
-brew install homebrew/emacs/tern
-```
-
-For other installations methods. See [ternjs.net](http://ternjs.net)
 
 Cheers!

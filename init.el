@@ -33,7 +33,7 @@
 (setq mac-option-modifier nil)
 (setq shell-file-name "bash")
 (setq use-package-always-ensure t)
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 
 (when (eq system-type 'windows-nt)
   (require 'ls-lisp)
@@ -54,13 +54,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
+ '(auto-save-list-file-prefix nil)
  '(backup-directory-alist '((".*" . "~/.emacs.d/backups/")))
  '(column-number-mode t)
  '(helm-follow-mode-persistent t)
- ;; '(magit-commit-arguments (quote ("--gpg-sign=<>")))
  '(helm-source-names-using-follow '("Search at ~/.emacs.d/"))
  '(package-selected-packages
-   '(yaml-mode company-tern company diminish swift-mode ember-mode editorconfig evil-anzu eldoc-eval projectile doom-themes helm-dash multiple-cursors wgrep-ag wgrep ag php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end org tern-auto-complete tern yasnippet helm-ls-git helm web-mode spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html))
+   '(yaml-mode web-mode rjsx-mode prettier-js js2-mode flycheck ruby-end ember-mode json-mode editorconfig neotree yasnippet helm-dash helm-ls-git helm-projectile helm-ag helm-hunks wgrep-ag wgrep ag magit doom-modeline doom-themes company-lsp helm-lsp dap-mode lsp-java lsp-ui lsp-mode company exec-path-from-shell highlight-parentheses multiple-cursors projectile s dash use-package))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
@@ -74,6 +74,8 @@
 ;; --------------------------------------
 
 (cond
+ ((find-font (font-spec :family "SF Mono"))
+  (set-frame-font "SF Mono:pixelsize=12"))
  ((find-font (font-spec :family "Fira Code Retina"))
   (set-frame-font "Fira Code Retina:pixelsize=12"))
  ((find-font (font-spec :family "Menlo"))
@@ -81,39 +83,9 @@
  ((find-font (font-spec :family "Monaco"))
   (set-fram-font "Monaco:pixelsize=12")))
 
-(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
-               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
-               (36 . ".\\(?:>\\)")
-               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
-               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
-               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
-               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
-               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
-               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
-               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
-               (48 . ".\\(?:x[a-zA-Z]\\)")
-               (58 . ".\\(?:::\\|[:=]\\)")
-               (59 . ".\\(?:;;\\|;\\)")
-               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
-               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
-               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
-               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
-               (91 . ".\\(?:]\\)")
-               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
-               (94 . ".\\(?:=\\)")
-               (119 . ".\\(?:ww\\)")
-               (123 . ".\\(?:-\\)")
-               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
-               )
-             ))
-  (dolist (char-regexp alist)
-    (set-char-table-range composition-function-table (car char-regexp)
-                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
+
 
 ;; --------------------------------------
-
-(require 'cl)
 
 (use-package dash
   :ensure t
@@ -176,7 +148,7 @@
 
 (use-package company
   :commands company-mode
-  :diminish company-mode tern-mode
+  :diminish company-mode
   :init
   (setq company-idle-delay 0.2
         company-tooltip-align-annotations t
@@ -186,12 +158,49 @@
         company-require-match nil)
   (add-hook 'prog-mode-hook 'company-mode))
 
-(use-package company-tern
-  :after company
-  :diminish company-mode tern-mode
+(use-package lsp-mode
+  :ensure t
+  :init
+  (progn
+    (require 'lsp-clients)
+    (add-hook 'js2-mode-hook 'lsp)
+    (add-hook 'web-mode-hook 'lsp)
+    (add-hook 'java-mode-hook 'lsp))
   :config
-  (add-to-list 'company-backends 'company-tern)
-  (setq tern-command (append tern-command '("--no-port-file"))))
+  (add-to-list 'lsp-language-id-configuration '(rjsx-mode . "javascript")))
+
+(use-package lsp-ui
+  :init
+  (progn
+    (setq lsp-ui-sideline-show-code-actions nil
+          lsp-ui-peek-fontify t)
+    (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  :config
+  (progn
+    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))
+
+(use-package lsp-java
+  :ensure t
+  :after lsp-mode)
+
+(use-package dap-mode
+  :ensure t
+  :after lsp-mode
+  :config
+  (dap-mode t)
+  (dap-ui-mode t))
+
+(use-package helm-lsp
+  :config
+  (progn
+    (define-key lsp-mode-map [remap xref-find-apropos] #'help-lsp-workspace-symbol)))
+
+(use-package company-lsp
+  :after company
+  :init
+  (setq company-lsp-cache-candidates t
+        company-lsp-async t))
 
 (use-package doom-themes
   :defer t
@@ -202,6 +211,12 @@
     (doom-themes-visual-bell-config))
   :init
   (load-theme 'doom-vibrant t))
+
+(use-package doom-modeline
+      :ensure t
+      :hook (after-init . doom-modeline-mode)
+      :config
+      (setq doom-modeline-lsp t))
 
 (use-package magit
   :commands magit-status
@@ -228,6 +243,7 @@
   :diminish helm-mode
   :bind (("C-x c f" . helm-projectile-ag)
          ("C-x C-f" . helm-find-files)
+         ("C-x c d" . helm-projectile-find-file)
          ("C-x C-b" . helm-buffers-list)
          ("C-x c y" . helm-show-kill-ring)
          ("C-x c s" . helm-ag-this-file)
@@ -376,11 +392,21 @@
   (setq js-indent-level 2)
 
   :config
-  (add-hook 'js2-mode-hook (lambda () (flycheck-mode 1)))
-  (add-hook 'js2-mode-hook 'tern-mode))
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (flycheck-mode 1))))
+
+(use-package prettier-js
+  :after js2-mode
+  :config
+  (add-hook 'js2-mode-hook 'prettier-js-mode))
+
+(use-package rjsx-mode
+  :mode "\\.jsx?$"
+  :commands (rjsx-mode))
 
 (use-package web-mode
-  :mode "\\.\\(html\\|css\\|less\\|scss\\|jsx\\|hbs\\|php\\)$"
+  :mode "\\.\\(html\\|css\\|less\\|scss\\|jsx\\|hbs\\|mustache\\|php\\)$"
   :init
   (setq web-mode-content-types-alist
         '(("jsx" . "\\.js[x]?\\'")
