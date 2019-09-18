@@ -59,8 +59,6 @@
  '(column-number-mode t)
  '(helm-follow-mode-persistent t)
  '(helm-source-names-using-follow '("Search at ~/.emacs.d/"))
- '(package-selected-packages
-   '(yaml-mode web-mode rjsx-mode prettier-js js2-mode flycheck ruby-end ember-mode json-mode editorconfig neotree yasnippet helm-dash helm-ls-git helm-projectile helm-ag helm-hunks wgrep-ag wgrep ag magit doom-modeline doom-themes company-lsp helm-lsp dap-mode lsp-java lsp-ui lsp-mode company exec-path-from-shell highlight-parentheses multiple-cursors projectile s dash use-package))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
@@ -83,6 +81,9 @@
  ((find-font (font-spec :family "Monaco"))
   (set-fram-font "Monaco:pixelsize=12")))
 
+;; --------------------------------------
+
+(require 'cc-mode)
 
 
 ;; --------------------------------------
@@ -164,8 +165,7 @@
   (progn
     (require 'lsp-clients)
     (add-hook 'js2-mode-hook 'lsp)
-    (add-hook 'web-mode-hook 'lsp)
-    (add-hook 'java-mode-hook 'lsp))
+    (add-hook 'web-mode-hook 'lsp))
   :config
   (add-to-list 'lsp-language-id-configuration '(rjsx-mode . "javascript")))
 
@@ -182,7 +182,9 @@
 
 (use-package lsp-java
   :ensure t
-  :after lsp-mode)
+  :after lsp-mode
+  :config
+  (add-hook 'java-mode-hook 'lsp))
 
 (use-package dap-mode
   :ensure t
@@ -373,6 +375,8 @@
   (progn
     (flycheck-add-mode 'javascript-eslint 'web-mode)
     (flycheck-add-mode 'javascript-eslint 'js2-mode)
+    (flycheck-add-mode 'javascript-eslint 'rjsx-mode)
+    (flycheck-add-mode 'json-jsonlint 'json-mode)
     (flycheck-add-mode 'css-csslint 'web-mode)
     (flycheck-add-mode 'css-csslint 'less-css-mode)))
 
@@ -397,9 +401,10 @@
               (flycheck-mode 1))))
 
 (use-package prettier-js
-  :after js2-mode
+  :commands prettier-js-mode
   :config
-  (add-hook 'js2-mode-hook 'prettier-js-mode))
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'css-mode-hook 'prettier-js-mode))
 
 (use-package rjsx-mode
   :mode "\\.jsx?$"
@@ -415,6 +420,13 @@
   (setq web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2))
+
+(use-package json-mode
+  :mode "\\(json\\|jshintrc\\|eslintrc\\)$")
+
+(use-package json-reformat
+  :commands json-reformat
+  :init (setq json-reformat:indent-width 2))
 
 (use-package less-css-mode
   :mode "\\.less$"
