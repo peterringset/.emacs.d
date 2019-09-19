@@ -64,16 +64,16 @@
 (require 't-magit)
 (require 't-yasnippet)
 
-(require 'lang-js)
-(require 'lang-json)
-(require 'lang-java)
 (require 'lang-css)
 (require 'lang-ember)
+(require 'lang-java)
+(require 'lang-js)
+(require 'lang-json)
 (require 'lang-markdown)
 (require 'lang-org)
+(require 'lang-swift)
 (require 'lang-ruby)
 (require 'lang-yaml)
-
 
 
 ;; -----------------------------------------------------------------------------
