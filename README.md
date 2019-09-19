@@ -12,6 +12,13 @@ Clone this into your home folder as `.emacs.d`. Rember to backup your old `.emac
 git clone https://github.com/tmn/.emacs.d.git ~/.emacs.d
 ```
 
+## Install Emacs
+
+```
+brew tap d12frosted/emacs-plus
+brew install emacs-plus --HEAD --with-jansson --with-modern-icon --without-spacemacs-icon
+```
+
 ## OS dependencies
 
 Install system dependencies for some of the emacs packages.
@@ -30,10 +37,17 @@ apt-get install silversearcher-ag
 
 ## Other dependencies
 
+### Swift
+
+Download and install latest snapshot of Swift toolchain from [swift.org](https://swift.org/download/#snapshots).
+
+**These packages may be installed through npm:**
 
 * typescript-language-server
 * javascript-typescript-langserver
 * typescript
+* babel
+* babel-eslint
 
 
 Cheers!
