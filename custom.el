@@ -4,15 +4,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
+ '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
  '(auto-save-list-file-prefix nil)
- '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
+ '(backup-directory-alist '((".*" . "~/.emacs.d/backups/")))
  '(column-number-mode t)
  '(helm-follow-mode-persistent t)
- '(helm-source-names-using-follow (quote ("Search at ~/.emacs.d/")))
+ '(helm-source-names-using-follow '("Search at ~/.emacs.d/"))
  '(package-selected-packages
-   (quote
-    (diminish eslint-fix yaml-mode web-mode rjsx-mode prettier-js js2-mode flycheck ruby-end ember-mode json-mode editorconfig neotree yasnippet helm-dash helm-ls-git helm-projectile helm-ag helm-hunks wgrep-ag wgrep ag magit doom-modeline doom-themes company-lsp helm-lsp dap-mode lsp-java lsp-ui lsp-mode company exec-path-from-shell highlight-parentheses multiple-cursors projectile s dash use-package)))
+   '(swift-mode lsp-sourcekit diminish eslint-fix yaml-mode web-mode rjsx-mode prettier-js js2-mode flycheck ruby-end ember-mode json-mode editorconfig neotree yasnippet helm-dash helm-ls-git helm-projectile helm-ag helm-hunks wgrep-ag wgrep ag magit doom-modeline doom-themes company-lsp helm-lsp dap-mode lsp-java lsp-ui lsp-mode company exec-path-from-shell highlight-parentheses multiple-cursors projectile s dash use-package))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))

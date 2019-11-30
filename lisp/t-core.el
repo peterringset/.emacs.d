@@ -49,7 +49,7 @@
          ("C-x C-f" . helm-find-files)
          ("C-x c d" . helm-projectile-find-file)
          ("C-x C-b" . helm-buffers-list)
-         ("C-x c y" . helm-show-kill-ring)
+         ("M-y" . helm-show-kill-ring)
          ("C-x c s" . helm-ag-this-file)
          ("M-x" . helm-M-x))
 
@@ -196,6 +196,12 @@
     (flycheck-add-mode 'json-jsonlint 'json-mode)
     (flycheck-add-mode 'css-csslint 'web-mode)
     (flycheck-add-mode 'css-csslint 'less-css-mode)))
+
+(use-package swiper-helm
+  :commands swiper-helm
+  :bind (("C-s" . swiper-helm)
+         ("C-r" . swiper-helm)
+         ))
 
 (provide 't-core)
 ;;; t-core.el ends here
