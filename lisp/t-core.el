@@ -45,9 +45,9 @@
 (use-package helm
   :commands (helm-mini helm-projectile helm-projectile-ag)
   :diminish helm-mode
-  :bind (("C-x c f" . helm-projectile-ag)
+  :bind (("C-x C-p" . helm-projectile-ag)
          ("C-x C-f" . helm-find-files)
-         ("C-x c d" . helm-projectile-find-file)
+         ("C-x C-o" . helm-projectile-find-file)
          ("C-x C-b" . helm-buffers-list)
          ("M-y" . helm-show-kill-ring)
          ("C-x c s" . helm-ag-this-file)
@@ -84,11 +84,14 @@
   :commands (helm-hunks
              helm-hunks-current-buffer
              helm-hunks-staged
-             helm-hunks-staged-current-buffer))
+             helm-hunks-staged-current-buffer)
+  :init
+  (progn
+    (setq helm-hunks-preview-diffs t)))
 
 (use-package helm-ag
   :after helm
-  :commands helm-ag
+  :commands (helm-ag helm-projectile-ag)
   :init
   (setq helm-ag-fuzzy-match t
         helm-ag-insert-at-point 'symbol
@@ -97,7 +100,7 @@
 
 (use-package helm-projectile
   :after helm
-  :commands helm-projectile)
+  :commands (helm-projectile helm-projectile-ag))
 
 (use-package helm-ls-git
   :after helm
