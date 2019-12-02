@@ -69,6 +69,7 @@
 (require 'lang-java)
 (require 'lang-js)
 (require 'lang-json)
+(require 'lang-kotlin)
 (require 'lang-markdown)
 (require 'lang-org)
 (require 'lang-swift)
