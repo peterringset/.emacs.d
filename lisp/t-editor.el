@@ -26,7 +26,10 @@
              neotree-show
              neotree-hide
              neotree-find)
-  :bind (([f5] . neotree-toggle))
+  :bind (
+         ([f5] . neotree-toggle)
+         ([f4] . neotree-find)
+         )
   :init
   (setq neo-window-width 35
         neo-smart-open nil
