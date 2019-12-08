@@ -22,17 +22,6 @@
             (lambda ()
               (flycheck-mode 1))))
 
-(use-package web-mode
-  :mode "\\.\\(html\\|css\\|less\\|scss\\|jsx\\|hbs\\|mustache\\|php\\)$"
-  :init
-  (setq web-mode-content-types-alist
-        '(("jsx" . "\\.js[x]?\\'")
-          ("css" . "\\.\\(less\\|scss\\)$")))
-
-  (setq web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2))
-
 (use-package prettier-js
   :commands prettier-js-mode
   :config
