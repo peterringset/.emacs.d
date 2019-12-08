@@ -1,6 +1,12 @@
-;;; lang-css.el --- JSON support -*- lexical-binding: t -*-
+;;; lang-css.el --- CSS -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
+
+(use-package css-mode
+  :mode "\\.css$"
+  :config
+  (add-hook 'css-mode-hook (lambda ()
+                             (setq css-indent-offset 2))))
 
 (use-package less-css-mode
   :mode "\\.less$"
