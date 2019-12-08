@@ -66,6 +66,7 @@
 
 (require 'lang-css)
 (require 'lang-ember)
+(require 'lang-html)
 (require 'lang-java)
 (require 'lang-js)
 (require 'lang-json)
