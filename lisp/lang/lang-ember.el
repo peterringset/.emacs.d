@@ -1,4 +1,4 @@
-;;; lang-ember.el --- JSON support -*- lexical-binding: t -*-
+;;; lang-ember.el --- Ember -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

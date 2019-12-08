@@ -1,4 +1,4 @@
-;;; lang-org.el --- JSON support -*- lexical-binding: t -*-
+;;; lang-org.el --- Org Mode -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

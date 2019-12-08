@@ -1,4 +1,4 @@
-;;; lang-markdown.el --- JSON support -*- lexical-binding: t -*-
+;;; lang-markdown.el --- Markdown support -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

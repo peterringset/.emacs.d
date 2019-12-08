@@ -1,4 +1,4 @@
-;;; lang-swift.el --- JSON support -*- lexical-binding: t -*-
+;;; lang-swift.el --- Swift -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

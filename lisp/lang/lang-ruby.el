@@ -1,4 +1,4 @@
-;;; lang-ruby.el --- JSON support -*- lexical-binding: t -*-
+;;; lang-ruby.el --- Ruby -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

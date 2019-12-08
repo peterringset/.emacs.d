@@ -1,4 +1,4 @@
-;;; lang-yaml.el --- JSON support -*- lexical-binding: t -*-
+;;; lang-yaml.el --- YAML support -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
