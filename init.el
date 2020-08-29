@@ -29,13 +29,8 @@
 (use-package dash)
 (use-package s)
 
-(let ((normal-gc-cons-threshold (* 20 1024 1024))
-      (init-gc-cons-threshold (* 128 1024 1024))
-      (my-gnutls-min-prime-bits 4096))
-  (setq gc-cons-threshold init-gc-cons-threshold)
-  (setq gnutls-min-prime-bits my-gnutls-min-prime-bits)
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+(let ((my-gnutls-min-prime-bits 4096))
+  (setq gnutls-min-prime-bits my-gnutls-min-prime-bits))
 
 (require 'epa-file)
 (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
@@ -43,7 +38,7 @@
 
 (setq-default
  explicit-shell-file-name "/bin/bash"
- gc-cons-threshold 20000000
+ gc-cons-threshold 100000000
  read-process-output-max (* 1024 1024))
 
 ;; -----------------------------------------------------------------------------
