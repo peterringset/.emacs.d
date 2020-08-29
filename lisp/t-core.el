@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package cc-mode)
+
 (use-package projectile
   :commands (projectile-mode helm-projectile projectile-project-root)
   :init

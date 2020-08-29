@@ -6,7 +6,8 @@
 ;;; Code:
 
 (require 'package)
-(package-initialize)
+(unless package--initialized
+  (package-initialize t))
 
 (setq package-enable-at-startup nil)
 (setq package-archives '(("org" . "http://orgmode.org/elpa/")
@@ -22,12 +23,11 @@
   (setq use-package-always-ensure t)
   (require 'cl))
 
+(require 'bind-key)
+
 (use-package diminish)
 (use-package dash)
 (use-package s)
-
-(require 'cc-mode)
-(require 'bind-key)
 
 (let ((normal-gc-cons-threshold (* 20 1024 1024))
       (init-gc-cons-threshold (* 128 1024 1024))
@@ -36,6 +36,10 @@
   (setq gnutls-min-prime-bits my-gnutls-min-prime-bits)
   (add-hook 'emacs-startup-hook
             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+
+(require 'epa-file)
+(custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
+(epa-file-enable)
 
 (setq-default
  explicit-shell-file-name "/bin/bash"
@@ -91,23 +95,28 @@
 ;; -----------------------------------------------------------------------------
 ;; ...
 ;; -----------------------------------------------------------------------------
-(setq-default indent-tabs-mode nil)
-(setq-default line-spacing 6)
-(setq-default tab-always-indent 'complete)
+(setq-default
+ indent-tabs-mode nil
+ line-spacing 6
+ tab-always-indent 'complete
+)
 
-(setq inhibit-startup-screen t)
-(setq mac-command-modifier 'meta) ; Set cmd to meta key
-(setq mac-option-modifier nil)
-(setq select-enable-clipboard t)
-(setq shell-file-name "/usr/local/bin/fish")
-(setq tab-width 2)
+(setq
+ inhibit-startup-screen t
+ select-enable-clipboard t
+ shell-file-name "/bin/zsh"
+ tab-width 2
+)
 
 (when (eq system-type 'windows-nt)
   (require 'ls-lisp)
   (setq ls-lisp-use-insert-directory-program nil))
 
 (when (eq system-type 'darwin)
-  (setq dired-use-ls-dired nil))
+  (setq
+   dired-use-ls-dired nil
+   mac-command-modifier 'meta ; Set cmd to meta key
+   mac-option-modifier nil))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -131,7 +140,6 @@
   (set-frame-font "Menlo:pixelsize=12"))
  ((find-font (font-spec :family "Monaco"))
   (set-fram-font "Monaco:pixelsize=12")))
-
 
 (provide 'init)
 ;;; init.el ends here
