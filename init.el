@@ -48,9 +48,11 @@
 (defconst user-dir-snippets (user-emacs-file "snippets"))
 (defconst user-dir-lisp (user-emacs-file "lisp"))
 (defconst user-dir-lisp-lang (user-emacs-file "lisp/lang"))
+(defconst vendor-dir-lisp (user-emacs-file "vendor"))
 
 (add-to-list 'load-path user-dir-lisp)
 (add-to-list 'load-path user-dir-lisp-lang)
+(add-to-list 'load-path vendor-dir-lisp)
 
 ;; -----------------------------------------------------------------------------
 ;; Bootstrap configs
@@ -76,6 +78,9 @@
 (require 'lang-swift)
 (require 'lang-ruby)
 (require 'lang-yaml)
+
+;; Vendor stuff
+(require 'mustache-mode)
 
 
 ;; -----------------------------------------------------------------------------
