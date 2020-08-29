@@ -101,7 +101,7 @@
 
 (use-package helm-projectile
   :after helm
-  :commands (helm-projectile helm-projectile-ag))
+  :commands (helm-projectile helm-projectile-ag helm-projectile-find-file))
 
 (use-package helm-ls-git
   :after helm
@@ -141,46 +141,58 @@
   :commands company-mode
   :diminish company-mode
   :init
-  (setq company-idle-delay 0.2
-        company-tooltip-align-annotations t
-        company-tooltip-flip-when-above t
-        company-show-numbers t
-        company-selection-wrap-around t
-        company-require-match nil)
+  (setq
+   company-minimum-prefix-length 1
+   company-idle-delay 0.0
+   company-tooltip-align-annotations t
+   company-tooltip-flip-when-above t
+   company-show-numbers t
+   company-selection-wrap-around t
+   company-require-match nil)
   (add-hook 'prog-mode-hook 'company-mode))
 
 (use-package lsp-mode
-  :ensure t
   :init
-  (progn
-    (require 'lsp-clients)
-    (add-hook 'js2-mode-hook 'lsp)
-    (add-hook 'web-mode-hook 'lsp))
+  (setq lsp-keymap-prefix "C-l")
   :config
-  (add-to-list 'lsp-language-id-configuration '(rjsx-mode . "javascript")))
+  (progn
+    (setq
+      lsp-completion-provider :capf
+      lsp-idle-delay 0.400))
+  :hook (
+         (rjsx-mode . lsp)
+         (web-mode . lsp)
+         (js2-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
   :init
   (progn
-    (setq lsp-ui-sideline-show-code-actions nil
+    (setq lsp-ui-sideline-show-code-actions t
           lsp-ui-peek-fontify t)
     (add-hook 'lsp-mode-hook 'lsp-ui-mode))
   :config
   (progn
-    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))
+     (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+     (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
+  :commands lsp-ui-mode)
+
+(use-package helm-lsp
+  :commands helm-lsp-workspace-symbol)
 
 (use-package dap-mode
   :ensure t
-  :after lsp-mode
   :config
   (dap-mode t)
   (dap-ui-mode t))
 
-(use-package helm-lsp
-  :config
-  (progn
-    (define-key lsp-mode-map [remap xref-find-apropos] #'help-lsp-workspace-symbol)))
+(use-package which-key
+    :config
+    (progn
+      (setq which-key-idle-delay 0.05)
+      (setq which-key-idle-secondary-delay 0.05)
+      (which-key-mode)))
 
 (use-package company-lsp
   :after company
@@ -204,8 +216,7 @@
 (use-package swiper-helm
   :commands swiper-helm
   :bind (("C-s" . swiper-helm)
-         ("C-r" . swiper-helm)
-         ))
+         ("C-r" . swiper-helm)))
 
 (provide 't-core)
 ;;; t-core.el ends here
