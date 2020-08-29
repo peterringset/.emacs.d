@@ -14,9 +14,13 @@
 
 (use-package doom-modeline
       :ensure t
-      :hook (after-init . doom-modeline-mode)
+      :init
+      (doom-modeline-mode 1)
       :config
-      (setq doom-modeline-lsp t))
+      (setq
+       doom-modeline-lsp t
+       doom-modeline-buffer-file-name-style 'auto
+       doom-modeline-env-version t))
 
 (use-package all-the-icons
   :defer t)
