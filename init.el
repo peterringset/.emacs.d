@@ -37,6 +37,11 @@
   (add-hook 'emacs-startup-hook
             (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
+(setq-default
+ explicit-shell-file-name "/bin/bash"
+ gc-cons-threshold 20000000
+ read-process-output-max (* 1024 1024))
+
 ;; -----------------------------------------------------------------------------
 ;; Directories
 ;; -----------------------------------------------------------------------------
