@@ -5,7 +5,8 @@
 (use-package cc-mode)
 
 (use-package projectile
-  :commands (projectile-mode helm-projectile projectile-project-root)
+  :after helm
+  :commands (projectile-mode helm-projectile projectile-project-root projectile-find-file)
   :init
   (setq projectile-mode-line '(:eval (format "[%s]" (projectile-project-name)))
         projectile-require-project-root nil
@@ -46,14 +47,12 @@
   :after ag)
 
 (use-package helm
-  :commands (helm-mini helm-projectile helm-projectile-ag)
+  :commands (helm-mini helm-find-file)
   :diminish helm-mode
-  :bind (("C-x C-p" . helm-projectile-ag)
+  :bind (
          ("C-x C-f" . helm-find-files)
-         ("C-x C-o" . helm-projectile-find-file)
          ("C-x C-b" . helm-buffers-list)
          ("M-y" . helm-show-kill-ring)
-         ("C-x c s" . helm-ag-this-file)
          ("M-x" . helm-M-x))
 
   :init
@@ -102,16 +101,14 @@
         helm-ag-edit-save t))
 
 (use-package helm-projectile
-  :after helm
-  :commands (helm-projectile helm-projectile-ag helm-projectile-find-file))
+  :ensure t
+  :commands (helm-projectile helm-projectile-ag helm-projectile-find-file)
+  :bind (("C-x C-o" . helm-projectile-find-file)
+         ("C-x C-p" . helm-projectile-ag)))
 
 (use-package helm-ls-git
   :after helm
   :bind (("C-x C-d" . helm-browse-project)))
-
-(use-package helm-dash
-  :after helm
-  :commands helm-dash)
 
 (use-package multiple-cursors
   :ensure t
@@ -156,6 +153,8 @@
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-l")
+  :bind
+  (("M-RET" . lsp-execute-code-action))
   :config
   (progn
     (setq
@@ -205,15 +204,15 @@
 (use-package flycheck
   :commands flycheck-mode
   :diminish flycheck-mode
-  :init (global-flycheck-mode)
-  :config
+  :init
+  (global-flycheck-mode)
   (add-to-list 'display-buffer-alist
                `(,(rx bos "*Flycheck errors*" eos)
                  (display-buffer-reuse-window
                   display-buffer-in-side-window)
                  (side            . bottom)
                  (reusable-frames . visible)
-                 (window-height   . 0.25))))
+                 (window-height   . 0.15))))
 
 (use-package swiper-helm
   :commands swiper-helm
