@@ -27,6 +27,7 @@
   (add-to-list 'grep-find-ignored-files "**.bundle.css")
   (add-to-list 'grep-find-ignored-files "**.min.js")
   (add-to-list 'grep-find-ignored-files "**.min.css")
+  (add-to-list 'grep-find-ignored-files "package-lock.json")
   (add-to-list 'grep-find-ignored-files ".DS_Store"))
 
 (use-package ag
