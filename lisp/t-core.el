@@ -207,13 +207,13 @@
   :diminish flycheck-mode
   :init (global-flycheck-mode)
   :config
-  (progn
-    (flycheck-add-mode 'javascript-eslint 'web-mode)
-    (flycheck-add-mode 'javascript-eslint 'js2-mode)
-    (flycheck-add-mode 'javascript-eslint 'rjsx-mode)
-    (flycheck-add-mode 'json-jsonlint 'json-mode)
-    (flycheck-add-mode 'css-csslint 'web-mode)
-    (flycheck-add-mode 'css-csslint 'less-css-mode)))
+  (add-to-list 'display-buffer-alist
+               `(,(rx bos "*Flycheck errors*" eos)
+                 (display-buffer-reuse-window
+                  display-buffer-in-side-window)
+                 (side            . bottom)
+                 (reusable-frames . visible)
+                 (window-height   . 0.25))))
 
 (use-package swiper-helm
   :commands swiper-helm
