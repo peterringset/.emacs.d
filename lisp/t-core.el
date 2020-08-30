@@ -5,8 +5,8 @@
 (use-package cc-mode)
 
 (use-package projectile
-  :after helm
-  :commands (projectile-mode helm-projectile projectile-project-root projectile-find-file)
+  :demand t
+  :commands (projectile-mode projectile-project-root projectile-find-file)
   :init
   (setq projectile-mode-line '(:eval (format "[%s]" (projectile-project-name)))
         projectile-require-project-root nil
@@ -34,19 +34,15 @@
   (add-to-list 'grep-find-ignored-files ".DS_Store"))
 
 (use-package ag
+  :demand t
   :commands ag
   :config
   (setq ag-reuse-buffers t
         ag-highlight-search t
         ag-project-root-function (lambda () (projectile-project-root))))
 
-(use-package wgrep
-  :after ag)
-
-(use-package wgrep-ag
-  :after ag)
-
 (use-package helm
+  :demand t
   :commands (helm-mini helm-find-file)
   :diminish helm-mode
   :bind (
@@ -83,6 +79,7 @@
     (add-hook 'helm-before-initialize-hook 'neotree-hide)))
 
 (use-package helm-hunks
+  :after helm
   :commands (helm-hunks
              helm-hunks-current-buffer
              helm-hunks-staged
@@ -92,7 +89,7 @@
     (setq helm-hunks-preview-diffs t)))
 
 (use-package helm-ag
-  :after helm
+  :after (helm ag)
   :commands (helm-ag helm-projectile-ag)
   :init
   (setq helm-ag-fuzzy-match t
@@ -101,7 +98,7 @@
         helm-ag-edit-save t))
 
 (use-package helm-projectile
-  :ensure t
+  :after (helm projectile ag)
   :commands (helm-projectile helm-projectile-ag helm-projectile-find-file)
   :bind (("C-x C-o" . helm-projectile-find-file)
          ("C-x C-p" . helm-projectile-ag)))
@@ -109,6 +106,12 @@
 (use-package helm-ls-git
   :after helm
   :bind (("C-x C-d" . helm-browse-project)))
+
+(use-package wgrep
+  :after ag)
+
+(use-package wgrep-ag
+  :after ag)
 
 (use-package multiple-cursors
   :ensure t
@@ -151,33 +154,32 @@
   (add-hook 'prog-mode-hook 'company-mode))
 
 (use-package lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-l")
-  :bind
-  (("M-RET" . lsp-execute-code-action))
+  :init (setq lsp-keymap-prefix "C-c l")
+  :bind (("M-RET" . lsp-execute-code-action))
   :config
   (progn
     (setq
-      lsp-completion-provider :capf
-      lsp-idle-delay 0.400))
-  :hook (
-         (rjsx-mode . lsp)
+     lsp-auto-configure t
+     lsp-enable-snippet t
+     lsp-completion-provider :capf
+     lsp-idle-delay 0.400))
+  :hook ((rjsx-mode . lsp)
          (web-mode . lsp)
          (js2-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
-  :commands (lsp lsp-deferred))
+  :commands lsp)
 
 (use-package lsp-ui
+  :commands lsp-ui-mode
   :init
   (progn
     (setq lsp-ui-sideline-show-code-actions t
-          lsp-ui-peek-fontify t)
-    (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+          lsp-ui-sideline-show-hover t
+          lsp-ui-peek-fontify t))
   :config
   (progn
      (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-     (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
-  :commands lsp-ui-mode)
+     (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))
 
 (use-package helm-lsp
   :commands helm-lsp-workspace-symbol)
