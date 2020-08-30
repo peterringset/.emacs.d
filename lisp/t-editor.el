@@ -53,5 +53,10 @@
   :config
   (editorconfig-mode 1))
 
+(use-package rst
+  :mode (("\\.txt$" . rst-mode)
+         ("\\.rst$" . rst-mode)
+         ("\\.rest$" . rst-mode)))
+
 (provide 't-editor)
 ;;; t-editor.el ends here
