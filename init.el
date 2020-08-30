@@ -68,6 +68,7 @@
 (require 't-core)
 (require 't-editor)
 (require 't-magit)
+(require 't-term)
 (require 't-yasnippet)
 
 (require 'lang-css)
