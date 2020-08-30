@@ -18,15 +18,19 @@
   (setq js-indent-level 2)
 
   :config
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (flycheck-mode 1))))
+  (add-hook 'js2-mode-hook (lambda () (flycheck-mode 1))))
 
 (use-package prettier-js
+  :ensure t
   :commands prettier-js-mode
-  :config
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'css-mode-hook 'prettier-js-mode))
+  :init
+  (progn
+    (setq prettier-js-args '("--jsx-bracket-same-line")
+          prettier-js-show-errors 'buffer)
+
+    (add-hook 'js2-mode-hook 'prettier-js-mode)
+    (add-hook 'css-mode-hook 'prettier-js-mode)
+    (add-hook 'rjsx-mode-hook 'prettier-js-mode)))
 
 (use-package rjsx-mode
   :mode "\\.jsx?$"
