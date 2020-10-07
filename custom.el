@@ -12,6 +12,8 @@
  '(epg-gpg-program "/usr/local/bin/gpg")
  '(helm-follow-mode-persistent t)
  '(helm-source-names-using-follow '("Search at ~/.emacs.d/"))
+ '(magit-fetch-arguments '("--prune"))
+ '(magit-rebase-arguments '("--autosquash"))
  '(org-agenda-files nil)
  '(org-startup-truncated nil)
  '(package-selected-packages
