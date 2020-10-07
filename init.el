@@ -53,14 +53,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
- '(backup-directory-alist '((".*" . "~/.emacs.d/backups/")))
+ '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
+ '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(column-number-mode t)
  '(helm-follow-mode-persistent t)
- ;; '(magit-commit-arguments (quote ("--gpg-sign=<>")))
- '(helm-source-names-using-follow '("Search at ~/.emacs.d/"))
+ '(helm-source-names-using-follow (quote ("Search at ~/.emacs.d/")))
+ '(magit-fetch-arguments (quote ("--prune")))
+ '(magit-rebase-arguments (quote ("--autosquash")))
  '(package-selected-packages
-   '(yaml-mode company-tern company diminish swift-mode ember-mode editorconfig evil-anzu eldoc-eval projectile doom-themes helm-dash multiple-cursors wgrep-ag wgrep ag php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end org tern-auto-complete tern yasnippet helm-ls-git helm web-mode spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html))
+   (quote
+    (yaml-mode company-tern company diminish swift-mode ember-mode editorconfig evil-anzu eldoc-eval projectile doom-themes helm-dash multiple-cursors wgrep-ag wgrep ag php-mode helm-hunks all-the-icons auto-complete flycheck ninja-mode json-mode highlight-parentheses exec-path-from-shell helm-projectile helm-ag ruby-end org tern-auto-complete tern yasnippet helm-ls-git helm web-mode spacegray-theme neotree markdown-mode magit less-css-mode jsx-mode js3-mode js2-mode elm-mode dash-functional ac-math ac-html)))
  '(scroll-bar-mode nil)
  '(standard-indent 2)
  '(tool-bar-mode nil))
