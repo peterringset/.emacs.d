@@ -14,9 +14,9 @@
                     "-javaagent:/Users/tmn/.emacs.d/lib/lombok.jar")
 
    lsp-java-java-path "/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home/bin/java"
-   lsp-java-workspace-dir "/Users/tmn/.emacs.d/lsp-java/workspace"
-   lsp-java-workspace-cache-dir "/Users/tmn/.emacs.d/lsp-java/cache"
-   lsp-java-server-install-dir "/Users/tmn/.emacs.d/lsp-java/server")
+   lsp-java-workspace-dir "/Users/tmn/.emacs.d/.lsp-java/workspace"
+   lsp-java-workspace-cache-dir "/Users/tmn/.emacs.d/.lsp-java/cache"
+   lsp-java-server-install-dir "/Users/tmn/.emacs.d/.lsp-java/server")
   :config
   (progn
     (require 'lsp-java-boot)
