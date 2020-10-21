@@ -19,6 +19,7 @@
 (require 'bind-key)
 
 ;; Directories
+(setq default-directory "~/")
 (defconst +emacs-dir+ "~/.emacs.d")
 (defconst +emacs-conf-dir+ (concat +emacs-dir+ "/configs"))
 (defconst +emacs-snippets-dir+ (concat +emacs-dir+ "/snippets"))
