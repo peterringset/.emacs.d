@@ -44,6 +44,8 @@
 ;; -----------------------------------------------------------------------------
 ;; Directories
 ;; -----------------------------------------------------------------------------
+(setq default-directory "~/")
+
 (defconst user-emacs-directory "~/.emacs.d/")
 (defun user-emacs-file (path)
   "Prefix PATH with user-emacs-eidrectory."
