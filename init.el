@@ -102,9 +102,8 @@
 (setq
  inhibit-startup-screen t
  select-enable-clipboard t
- shell-file-name "/bin/zsh"
- tab-width 2
-)
+ explicit-shell-file-name "/bin/zsh"
+ tab-width 2)
 
 (when (eq system-type 'windows-nt)
   (require 'ls-lisp)
