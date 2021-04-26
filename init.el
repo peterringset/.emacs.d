@@ -35,6 +35,12 @@
         (unless (file-exists-p tmn/lib-file)
           (error "No file found: %s" tmn/lib-file))
 
-        (load tmn/lib-file nil 'nomessage 'nosuffix))))))
+        (load tmn/lib-file nil 'nomessage 'nosuffix))
+
+      (let ((pr/lib-file (concat user-emacs-directory "pr.el")))
+        (unless (file-exists-p pr/lib-file)
+          (error "No file found: %s" pr/lib-file))
+
+        (load pr/lib-file nil 'nomessage 'nosuffix))))))
 
 ;;; init.el ends here
